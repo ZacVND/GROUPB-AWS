@@ -38,7 +38,7 @@ SECRET_KEY = 'iv@g@wvt@v$mgke_l3%=w!_!*eronpn$htb2-w_l3t^gi(xg^7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.elasticbeanstalk.com', 'localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = ['.elasticbeanstalk.com', 'localhost', '127.0.0.1', '[::1]', '*']
 
 
 # Application definition
