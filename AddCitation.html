@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+
+<style>
+
+input[type=text], select {
+	width: 100%;
+	font-family: arial;
+	color: black;
+	background-color: #FEFDD4;
+	padding: 7px;
+	font-size: 20px;
+}
+
+label[id=labels] {
+	font-family: cursive;
+	color: #0000A0;
+	padding: 7px;
+	font-size: 20px;
+}
+
+
+a[id=submit] {
+	background-color: #78D836;
+	width: 100%;
+	font-family: arial;
+	font-size: 30px;
+	color: white;
+	padding:5px;
+	padding-left: 45%;
+	padding-right: 45%;
+}
+
+a[id=submit]:hover {
+	background-color: #4FAF0D;
+}
+
+a[id=cancel] {
+	background-color: #D00E08;
+	color: white;
+	font-family: arial;
+	font-size: 20px;
+	padding: 7px;
+	padding-left: 5%;
+	padding-right: 5%;	
+}
+</style>
+
+
+<body bgcolor="#D4FBED">
+
+	<h1 style="font-family:courier;"><i>Add a new Citation:</i></h1>
+
+	<form action="add_citation">
+		<label for="title" id="labels"><b>Title:</b></label>
+		<input type="text" name="details" id="title"><br>
+		<label for="Link" id="labels"><b>Link:<b></label>
+		<input type="text" name="details" id="link"><br>
+		<label for="notes" id="labels"><b>Notes:</b></label>
+		<input type="text" name="details" id="notes"><br><br>
+		<a type="submit" id="submit" href="ListCitations.html">Submit!</a><br><br>
+		<a type="submit" id="cancel" href="ListCitations.html">Cancel</a>
+	</form>
+
+</body>
+</html>
