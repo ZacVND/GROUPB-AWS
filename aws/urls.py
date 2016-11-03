@@ -22,12 +22,13 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = (
 
-    url(r'^$', auth_views.login),
+    url(r'^$', login),
     url(r'^logout/$', logout_page),
     # url(r'^accounts/login/$', 'django.contrib.auth.views.login'), # If user is not login it will redirect to login page
     url(r'^register/$', register),
 
-    url(r'^login/login/$', auth_views.login),
+    url(r'^login/login/$', login),
     url(r'^register/success/$', register_success),
     url(r'^home/$', home),
+    url(r'^AddCitation$',submitcitation)
 )
