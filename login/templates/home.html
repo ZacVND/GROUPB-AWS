@@ -2,6 +2,32 @@
 {% block title %}Welcome to Django{% endblock %}
 {% block head %}Welcome to Django{% endblock %}
 {% block content %}
-    <p>Welcome {{ user.username }} !!!</p>
+    <!--<p>Welcome {{ user.username }} !!!</p>-->
+    <h1 style="font-family:courier;"><i>Add a new Citation:</i></h1>
+
+
+<body bgcolor="#D4FBED">
+
+	<h1 style="font-family:courier"><i>Citations:</i></h1>
+
+<table>
+<tr>
+  <th>Title</th>
+  <th>Link</th>
+  <th>Notes</th>
+</tr>
+{% for b in obj %}
+<tr>
+  <td>{{ b.title }}</td>
+  <td>{{ b.link }}</td>
+  <td>{{ b.notes }}</td>
+</tr>
+{% endfor %}
+</table>
+
+
+	<a type="submit" id="add" href="/AddCitation">Add Citation</a>
+</body>
+
     <a href="/logout/">Logout</a>
 {% endblock %}
