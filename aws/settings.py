@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_DIR="/var/lib/postgresql/9.5/main"
 
 import django.contrib.auth
 django.contrib.auth.LOGIN_URL = '/'
@@ -20,14 +21,10 @@ django.contrib.auth.LOGIN_URL = '/'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': BASE_DIR + '/loginapp.sqlite',  # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME':'scenario_wk1',  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',   # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',   # Set to empty string for default.
-    }
+   }
 }
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -38,7 +35,7 @@ SECRET_KEY = 'iv@g@wvt@v$mgke_l3%=w!_!*eronpn$htb2-w_l3t^gi(xg^7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
