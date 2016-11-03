@@ -15,5 +15,6 @@ launch_server.sh
 deploy.sh
  usage:deploy.sh <target(staging or prod)>
 
-
 if you want to run periodically, set deploy.sh to crontab
+
+finally you cann access via http://groupb-aws-{prod, staging}.eu-west-1.elasticbeanstalk.com/
