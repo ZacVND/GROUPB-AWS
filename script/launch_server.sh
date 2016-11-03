@@ -35,6 +35,8 @@ echo 'checkout source code'
 git clone $REPO
 cd $PROJECT
 
+
 echo 'create environment it takes a long time'
 eb init --profile $PROFILE -r "${REGION}" -p "${PLATFORM}"
 eb create $ENVNAME --cname $CNAME
+

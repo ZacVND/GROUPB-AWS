@@ -34,6 +34,8 @@ git clone $REPO
 cd $PROJECT
 git pull
 
+
 echo 'create environment it takes a long time'
 eb init --profile $PROFILE -r "${REGION}" -p "${PLATFORM}"
 eb deploy $ENVNAME
+

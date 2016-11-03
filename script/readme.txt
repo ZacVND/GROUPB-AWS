@@ -6,6 +6,7 @@ setup:
   aws_secret_access_key = XXX
 3. (setup security group)
 
+
 you can run script manually
 
 launch_server.sh
@@ -13,5 +14,6 @@ launch_server.sh
 
 deploy.sh
  usage:deploy.sh <target(staging or prod)>
+
 
 if you want to run periodically, set deploy.sh to crontab
