@@ -42,18 +42,21 @@ def login(request):
     post_obj = dict(request.POST)
 
     try:
-        user = User.objects.filter(username=post_obj['username'][0], password=post_obj['password'][0]).first()
-
-        try:
-            citations = list(Citation.objects.all().values())
-
-            return render(request, 'main.html', {'user': user, 'citations': json.dumps(citations)})
-
-        except ObjectDoesNotExist:
-            return render(request, 'main.html', {'citations': 'None exists'})
+        user =  User.objects.get(username=post_obj['username'][0], password=post_obj['password'][0])
 
     except ObjectDoesNotExist:
         return redirect('/register')
+
+    except MultipleObjectsReturned:
+        user = User.objects.filter(username=post_obj['username'][0], password=post_obj['password'][0]).first()
+
+    try:
+        citations = list(Citation.objects.all().values())
+
+        return render(request, 'main.html', {'user': user, 'citations': json.dumps(citations)})
+
+    except ObjectDoesNotExist:
+        return render(request, 'main.html', {'citations': 'None exists'})
 
 
 def add_citation(request):
