@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Welcome to Django{% endblock %}
+{% block content %}
+<script type="text/javascript">
+    var citations = {{citations|safe}};
+</script>
+    <div class="container">
+        <div class="row">
+            <h1>Welcome, {{user.name}}</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2" id="addCitation">
+                <button class="btn btn-primary" id="addBtn">Add</button>
+                <input type="text" id="content">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset 2">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Content</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table_body">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'login/script/jquery.cookie.js' %}"></script>
+    <script src="{% static 'login/script/main.js' %}"></script>
+{% endblock %}

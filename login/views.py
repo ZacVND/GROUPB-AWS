@@ -1,45 +1,105 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
-#views.py
-from login.forms import *
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-# from django.views.decorators.csrf import csrf_protect
-from django.shortcuts import render_to_response
-from django.http import HttpResponseRedirect
-from django.template import RequestContext
+from django.http import JsonResponse
+from django.core.exceptions import *
+from login.models import User, Citation
 
-# @csrf_protect
+import json
+
 def register(request):
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            user = User.objects.create_user(
-            username=form.cleaned_data['username'],
-            password=form.cleaned_data['password1'],
-            email=form.cleaned_data['email']
-            )
-            return HttpResponseRedirect('/register/success/')
-    else:
-        form = RegistrationForm()
-    variables = RequestContext(request, {
-    'form': form
-    })
 
-    return render_to_response(
-    'registration/register.html',
-    variables,
-    )
+        post_obj = dict(request.POST)
+
+        username = post_obj['username'][0]
+
+        email = post_obj['email'][0]
+
+        password = post_obj['password'][0]
+
+        user = User(
+            username=username,
+            email=email,
+            password=password,
+        )
+
+        user.save()
+
+        return redirect('/')
+
+    else:
+        return render(request, 'registration/register.html')
+
+
+def login(request):
+    if request.method != 'POST':
+        return render(request, 'registration/login.html')
+
+    post_obj = dict(request.POST)
+
+    try:
+        user = User.objects.filter(username=post_obj['username'][0], password=post_obj['password'][0]).first()
+
+        try:
+            citations = list(Citation.objects.all().values())
+
+            return render(request, 'main.html', {'user': user, 'citations': json.dumps(citations)})
+
+        except ObjectDoesNotExist:
+            return render(request, 'main.html', {'citations': 'None exists'})
+
+    except ObjectDoesNotExist:
+        return redirect('/register')
+
+
+def add_citation(request):
+    if request.method != 'POST':
+        return JsonResponse({'success': 0})
+
+    post_obj = dict(request.POST)
+
+    content_text = post_obj['content'][0]
+
+    try:
+        cit = Citation(content=content_text)
+        cit.save()
+        return JsonResponse({'success': 1})
+
+    except (FieldError, FieldDoesNotExist) as e:
+        return JsonResponse({'success': 0})
+
+
+def delete_citation(request):
+    if request.method != 'POST':
+        return JsonResponse({'success': 0})
+
+    post_obj = dict(request.POST)
+
+    unique_id = post_obj['id'][0]
+
+    content = post_obj['content'][0]
+
+    try:
+        Citation.objects.filter(id=unique_id, content=content).delete()
+        return JsonResponse({'success': 1})
+
+    except:
+        return JsonResponse({'success': 1})
+
 
 def register_success(request):
-    return render_to_response(
-    'registration/success.html',
-    )
+    return render(request, 'registration/success.html')
+
+
 
 def logout_page(request):
     logout(request)
     return HttpResponseRedirect('/')
+
 
 @login_required
 def home(request):
