@@ -15,6 +15,9 @@ PROJECT=GROUPB-AWS
 #
 cd /home/ubuntu/
 
+#sudo killall python
+sudo sh -c 'ps ax|grep manage.py|grep runserver|grep -v grep|cut -d" " -f 2|xargs kill -9'
+
 echo 'checkout source code'
 if [ ! -e $PROJECT ]; then
     git clone $REPO
@@ -24,4 +27,9 @@ git pull
 python manage.py migrate
 cd ..
 
+#restart server
+cd /home/ubuntu/GROUPB-AWS
+python manage.py runserver 0.0.0.0:8000&
+
 date >> /home/ubuntu/log/deploy_prod.log
+
